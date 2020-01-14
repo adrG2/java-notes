@@ -134,3 +134,5 @@ javaNotes/.mvn/wrapper/maven-wrapper.properties
 javaNotes/.mvn/wrapper/MavenWrapperDownloader.java
 
 *.maven-wrapper.jar
+.vscode/launch.json
+.vscode/settings.json
