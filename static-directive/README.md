@@ -14,7 +14,7 @@ Constante de clase:
 
     ```Java
     public class Book {
-        private static final MATERIAL = "paper";
+        private static final string MATERIAL = "paper";
     }
     ```
 
