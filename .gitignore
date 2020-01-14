@@ -129,3 +129,8 @@ buildNumber.properties
 .flattened-pom.xml
 
 # End of https://www.gitignore.io/api/java,maven,intellij
+javaNotes/.mvn/wrapper/maven-wrapper.jar
+javaNotes/.mvn/wrapper/maven-wrapper.properties
+javaNotes/.mvn/wrapper/MavenWrapperDownloader.java
+
+*.maven-wrapper.jar
