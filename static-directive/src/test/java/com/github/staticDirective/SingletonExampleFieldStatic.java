@@ -3,6 +3,7 @@ package com.github.staticDirective;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsInstanceOf.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
@@ -21,10 +22,14 @@ public class SingletonExampleFieldStatic {
     public void checkInstanceSingleton() {
         SingletonTest instance = SingletonTest.getInstance(3);
         assertThat(instance, instanceOf(SingletonTest.class));
-        assertEquals(instance.getI(), 3);
+        assertEquals(3, instance.getI());
 
-        instance = SingletonTest.getInstance(4);
-        assertEquals(instance.getI(), 3);
+        instance = SingletonTest.getInstance(14);
+        assertEquals(3, instance.getI());
+
+        instance = null;
+        instance = SingletonTest.getInstance(288);
+        assertNotEquals(288, instance.getI());
     }
 
 }

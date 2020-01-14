@@ -40,9 +40,11 @@ Patrón Singleton usando campo estático para guardar una referencia de la insta
 
 Los campos estáticos no son serializados, por tanto, durante el proceso de deserialización, tomarán su valor por defecto(null para objetos, 0.0 para float, etc).
 
+--- 
 
 ## Métodos estáticos
 
+Debido a que los métodos estáticos son enlazados en tiempo de compilación mediante static binding usando la información del tipo, no es posible realizar override de métodos.
 
 
 
