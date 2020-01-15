@@ -10,13 +10,6 @@ Es una keyword reservada que sirve para declarar una clase, método o campo como
 
 Los campos de una clase declarados como estáticos son inicializados en el momento en que se carga la clase en memoria(ClassLoader), respetando el orden de la declaración. Los campos estáticos no pueden ser accedidos desde un contexto no estático, lo cuál provocaría un error en tiempo de ejecución. 
 
-Constante de clase:
-
-    ```Java
-    public class Book {
-        private static final string MATERIAL = "paper";
-    }
-    ```
 
 Patrón Singleton usando campo estático para guardar una referencia de la instancia:
 
@@ -40,6 +33,20 @@ Patrón Singleton usando campo estático para guardar una referencia de la insta
 
 Los campos estáticos no son serializados, por tanto, durante el proceso de deserialización, tomarán su valor por defecto(null para objetos, 0.0 para float, etc).
 
+
+#### Constante de clase:
+
+El modifier final indica que el valor de este campo no puede cambiar. Las constantes no pueden ser reasignadas, y lanzará un error en tiempo de ejecución si se intenta. 
+
+    ```Java
+    public class Book {
+        private static final string MATERIAL = "paper";
+        static final double PI = 3.141592653589793;
+    }
+    ```
+
+Si una constante es definida como constante y el valor se conoce en tiempo de compilación, el compilador reemplaza el nombre de la constante por todo el código por ese valor. A esto se le conoce como constante en tiempo de compilación. Si el valor de la constante cambia por cambios externos pues tendrás que recompilar todas las clases que usen esta constante para poder tener el nuevo valor. 
+
 --- 
 
 ## Métodos estáticos
@@ -49,7 +56,7 @@ Debido a que los métodos estáticos son enlazados en tiempo de compilación usa
 Otras de las consecuencias del static binding es que los métodos estáticos no pueden ser declarados como abstract, por el mismo motivo que la imposibilidad de la sobrecarga de métodos.
 
 Uno de las características que produce más dolores de cabeza al tratar con métodos y variables estáticas es que, debido a su naturaleza, no son seguras para la programación con hilos. 
-Para tratar más información acerca de esto: https://www.programcreek.com/2014/02/how-to-make-a-method-thread-safe-in-java/
+Para profundizar acerca de esto: https://www.programcreek.com/2014/02/how-to-make-a-method-thread-safe-in-java/
 
 --- 
 
@@ -85,7 +92,21 @@ public class Objeto {
 
 ### Static initializer block
 
-Son bloques de código que son ejecutados cuando se carga la clase(ClassLoader). Si no se declara un bloque de este tipo de forma explícita, el compilador Just-in-Time combina todos los campos estáticos en un bloque y los ejecuta durante la carga de clases. 
+Podemos inicializar campos con un valor inicial para variables de clase estáticas:
+```Java
+public class BedAndBreakfast {
+
+    // initialize to 10
+    public static int capacity = 10;
+
+    // initialize to false
+    private boolean full = false;
+}
+```
+
+Esto es útil cuando el valor está disponible y la inicialización puede ser puesta en una línea. Sin embargo, esto tiene ciertas limitaciones a causa de su simplicidad. Si la inicialización require de algo de lógica, por ejemplo, manejo de error o un bucle for para rellenar un array, la asignación simple es inadecuada. Las variables de instancia pueden ser inicializadas en el constructor, dónde el manejo de error u otra lógica puede ser usada. Para este mismo fin también podemos usar los "static initialization blocks".  
+
+Los static initialization blocks son bloques de código que son ejecutados cuando se carga la clase(ClassLoader). Si no se declara un bloque de este tipo de forma explícita, el compilador Just-in-Time combina todos los campos estáticos en un bloque y los ejecuta durante la carga de clases. 
 
 ```Java
 public class Objeto {
@@ -108,8 +129,22 @@ public class Objeto {
 }
 ```
 
-Esto nos permite inicializar variables de clase estáticas sin necesidad de incluirlo en su constructor. 
+Una clase puede tener cualquier número de static initialization blocks, y pueden aparecer en cualquier lado del body de la clase. El sistema en runtime garantiza que los static initialization blocks serán llamados en el orden en que aparecen en el código fuente.
 
+Hay una alternativa a los static blocks, un private static method:
+
+```Java
+class Whatever {
+    public static varType myVar = initializeClassVariable();
+        
+    private static varType initializeClassVariable() {
+
+        // initialization code goes here
+    }
+}
+```
+
+La ventaja de usar un método privado estático es que puede ser reutilizado más tarde si necesitas reinicializar la variable de clase.
 
 --- 
 
@@ -123,3 +158,5 @@ Una de las características incluidas en Java 5 fué la capacidad de importar lo
 
 ## Bibliografía
 https://www.adictosaltrabajo.com/2015/09/17/la-directiva-static-en-java/
+https://docs.oracle.com/javase/tutorial/java/javaOO/classvars.html
+https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
