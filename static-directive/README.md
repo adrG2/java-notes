@@ -63,10 +63,21 @@ Para profundizar acerca de esto: https://www.programcreek.com/2014/02/how-to-mak
 
 ## Clases y bloques estáticos
 
-Las clases internas pueden ser declaradas estáticas, de tal manera que aumenten la cohesión de la clase que las engloba. Hay que tener en cuenta que, como el resto de clases internas, el compilador crea un fichero .class por cada una de estas clases. 
+Las clases anidadas estáticas aumentan la cohesión de la clase que las engloba. Hay que tener en cuenta que el compilador crea un fichero .class por cada una de estas clases. 
+
+Tal y cómo pasa con los métodos y variables estáticos, una clase anidada estática está asociada con su clase externa. Y tal y como pasa con los métodos de clase estáticos, una clase anidada estática no puede referirse directamente a variables de instancia o método definidos en su clase adjunta: puede usarlos sólo a través de una referencia de objeto.
+
+Para crear un objeto de una clase anidada estática:
+``` Java
+OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass();
+```
+
+
 
 
 ### Ejemplo clase interna estática
+
+
 
 ```Java
 public class Objeto {
