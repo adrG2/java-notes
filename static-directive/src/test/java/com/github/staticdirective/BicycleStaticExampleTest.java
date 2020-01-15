@@ -1,9 +1,9 @@
-package com.github.staticDirective;
+package com.github.staticdirective;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import com.github.staticDirective.lib.Bicycle;
+import com.github.staticdirective.lib.Bicycle;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

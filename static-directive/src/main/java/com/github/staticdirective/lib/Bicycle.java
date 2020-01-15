@@ -1,4 +1,4 @@
-package com.github.staticDirective.lib;
+package com.github.staticdirective.lib;
 
 public class Bicycle {
 
