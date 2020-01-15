@@ -6,6 +6,7 @@
 	<modules>
 		<module>generics</module>
 		<module>static-directive</module>
+		<module>classes-objects</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
