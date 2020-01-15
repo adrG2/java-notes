@@ -365,9 +365,49 @@ public class LocalClassExample {
 ```
 
 
-## Accessing Members of an Enclosing Class
+### Accessing Members of an Enclosing Class
 
 Una clase local tiene acceso a los miembros de la clase que la envuelve. 
+
+Una clase local tiene acceso a variables locales. Sin embargo, una clase local sólo puede acceder a variables locales que sean declaradas como final. Cuando una clase local accede a una variable local o parámetro del bloque que la envuelve, captura esa variable o parámetro. 
+
+Sin embargo, en Java 8, una clase local puede acceder a variables locales y parámetros del bloque que la envuelve ya sean final o un "final efectivo". Una variable o parámetro cuyo valor nunca cambia tras ser inicializado es "final efectivo".
+
+Declaraciones de un tipo(como una variable) en una clase local sombrea(shadow) las declaraciones en el scope(ámbito) que lo envuelve cuando tienen el mismo nombre. 
+
+
+### Local Classes are similar to inner classes
+
+Las clases locales son similares a las clases internas en que no pueden definir o declarar ningún miembro estático. Las clases locales en métodos estáticos, pueden unicamente referirse a miembros estáticos de la clase que lo envuelve(enclosing class). 
+
+Las clases locales no son estáticas porque ella tienen acceso a miembros de instancia del bloque que lo envuelve. Por tanto, no pueden contener la mayoría de los tipos de declaraciones estáticas. 
+
+No se puede declarar una interface dentro de un block; las interfaces son inherentemente estáticas. 
+
+Tampoco puedes declarar inicializadores estáticos o miembros de interfaces en una clase local. Por ejemplo, esto no compilaría: 
+
+```Java
+public void sayGoodbyeInEnglish() {
+        class EnglishGoodbye {
+            public static void sayGoodbye() {
+                System.out.println("Bye bye");
+            }
+        }
+        EnglishGoodbye.sayGoodbye();
+    }
+```
+
+Una clase local puede tener miembros estáticos siempre que sean variables constantes.
+Ejemplo: `private static final int PI;`
+
+
+## Anonymous Classes
+
+Las clases anónimas te permiten hacer tu código más conciso. Le permiten declarar e instanciar una clase al mismo tiempo. Son como las clases locales, excepto que no tienen un nombres. Se usan cuando necesitas una clase local sólo una vez.
+
+### Declaring
+
+
 
 
 # Bibliography
