@@ -641,6 +641,14 @@ public class CustomTextFieldSample extends Application {
 }
 ```
 
+--- 
+
+## Lambda Expressions
+
+Un problema con las clases anónimas es que si la implementación de su clase anónima es muy simple, como una interface que contiene un sólo método, la sintaxis de las clases anónimas puede parecer difícil de manejar y poco clara. En estos casos, generalmente estás intentando pasar la funcionalidad como argumento a otro método, como por ejemplo, qué acción se debe tomar cuando alguien hace clic en un botón. Las expresiones lambda te permiten hacer esto, tratar la funcionalidad como argumento de método o el código como datos.
+
+
+### Ideal Use Case for Lambda Expressions
 
 
 
