@@ -401,11 +401,247 @@ Una clase local puede tener miembros estáticos siempre que sean variables const
 Ejemplo: `private static final int PI;`
 
 
+--- 
+
 ## Anonymous Classes
 
 Las clases anónimas te permiten hacer tu código más conciso. Le permiten declarar e instanciar una clase al mismo tiempo. Son como las clases locales, excepto que no tienen un nombres. Se usan cuando necesitas una clase local sólo una vez.
 
-### Declaring
+
+### Declaring anonymous classes
+
+En el siguiente ejemplo, la clase HelloWorldAnonymousClasses usa claúsulas anónima en las declaraciones de inicialización de las variables locales `frenchGreeting` y `spanishGreeting`, pero usa una clase local para la inicialización de la variable `englishGreeting`.
+
+
+```Java
+public class HelloWorldAnonymousClasses {
+  
+    interface HelloWorld {
+        public void greet();
+        public void greetSomeone(String someone);
+    }
+  
+    public void sayHello() {
+        
+        class EnglishGreeting implements HelloWorld {
+            String name = "world";
+            public void greet() {
+                greetSomeone("world");
+            }
+            public void greetSomeone(String someone) {
+                name = someone;
+                System.out.println("Hello " + name);
+            }
+        }
+      
+        HelloWorld englishGreeting = new EnglishGreeting();
+        
+        HelloWorld frenchGreeting = new HelloWorld() {
+            String name = "tout le monde";
+            public void greet() {
+                greetSomeone("tout le monde");
+            }
+            public void greetSomeone(String someone) {
+                name = someone;
+                System.out.println("Salut " + name);
+            }
+        };
+        
+        HelloWorld spanishGreeting = new HelloWorld() {
+            String name = "mundo";
+            public void greet() {
+                greetSomeone("mundo");
+            }
+            public void greetSomeone(String someone) {
+                name = someone;
+                System.out.println("Hola, " + name);
+            }
+        };
+        englishGreeting.greet();
+        frenchGreeting.greetSomeone("Fred");
+        spanishGreeting.greet();
+    }
+
+    public static void main(String... args) {
+        HelloWorldAnonymousClasses myApp =
+            new HelloWorldAnonymousClasses();
+        myApp.sayHello();
+    }            
+}
+```
+
+### Syntax of anonymous classes
+
+La sintaxis de la expresión de una clase anónima es como la invocación de un constructor, excepto que hay una definición de clase contenida en un bloque de código.
+
+```Java
+HelloWorld frenchGreeting = new HelloWorld() {
+    String name = "tout le monde";
+    public void greet() {
+        greetSomeone("tout le monde");
+    }
+    public void greetSomeone(String someone) {
+        name = someone;
+        System.out.println("Salut " + name);
+    }
+};
+```
+
+La expresión de una clase anónima consisten en:
+
+    1. El operador new
+    2. El nombre de una interface que implemente o una clase que extend. En el ejemplo de arriba la clase anónima implementa la interface HelloWorld.
+    3. Los paréntesis que contienen los argumentos para un constructor, al igual que una expresión de creación de instancia de clase normal(Cuando implementas una interface no hay constructor, así que usas un par de paréntesis vacíos como en el ejemplo).
+    4. Un body, el cuál es una body de declaración de clase. En el body, las declaraciones de métodos están permitidos pero las statements no. 
+
+A causa de que la definición de una clase anónima es una expresión, debe ser parte de un statement. En este ejemplo, la expresión de clase anónima es parte del statement que instancia el frenchGreeting object(Fíjate en el ';' del final). 
+
+
+### Accessing Local Variables of the Enclosing Scope, and Declaring and Accessing Members of the Anonymous Class
+
+Las clases anónimas pueden capturar variables; tienen el mismo acceso a las variables locales del enclosing scope: 
+
+    * Una clase anónima tiene acceso a los miembros de la clase envolvente.
+    * Una clase anónima no puede acceder a variables locales en su ámbito de inclusión(enclosing scope) que no se declaran como final.
+    * Al igual que en las clases anidadas, una declaración de un tipo en una clase anónima sombrea(shadow) cualquier otras declaraciones en el enclosing scope que tengan el mismo nombre. 
+
+Restricciones de las clases anónimas:
+
+    * No puedes declarar inicializadores estáticos o miembros de interfaces.
+    * Puede tener miembros estáticos en forma de variables constantes.
+
+Puedes declarar lo siguiente en una clase anónima:
+
+    * Fields
+    * Extra methods(incluso si no implementan métodos del superType)
+    * Inicializadores de instancia
+    * Clases locales
+
+Sin embargo, no puedes declarar constructores en una clase anónima.
+
+
+### Examples of anonymous classes
+
+```Java
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+ 
+public class HelloWorld extends Application {
+    public static void main(String[] args) {
+        launch(args);
+    }
+    
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Hello World!");
+        Button btn = new Button();
+        btn.setText("Say 'Hello World'");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+ 
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Hello World!");
+            }
+        });
+        
+        StackPane root = new StackPane();
+        root.getChildren().add(btn);
+        primaryStage.setScene(new Scene(root, 300, 250));
+        primaryStage.show();
+    }
+}
+```
+
+Ya que la interface EventHandler<ActionEvent> tiene un único método, puedes usar una expresión lambda en vez de una clase anónima. 
+
+Las clases anónimas son ideales para implementar interfaces con dos o más métodos.  
+
+
+```Java
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+
+public class CustomTextFieldSample extends Application {
+    
+    final static Label label = new Label();
+ 
+    @Override
+    public void start(Stage stage) {
+        Group root = new Group();
+        Scene scene = new Scene(root, 300, 150);
+        stage.setScene(scene);
+        stage.setTitle("Text Field Sample");
+ 
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(10, 10, 10, 10));
+        grid.setVgap(5);
+        grid.setHgap(5);
+ 
+        scene.setRoot(grid);
+        final Label dollar = new Label("$");
+        GridPane.setConstraints(dollar, 0, 0);
+        grid.getChildren().add(dollar);
+        
+        final TextField sum = new TextField() {
+            @Override
+            public void replaceText(int start, int end, String text) {
+                if (!text.matches("[a-z, A-Z]")) {
+                    super.replaceText(start, end, text);                     
+                }
+                label.setText("Enter a numeric value");
+            }
+ 
+            @Override
+            public void replaceSelection(String text) {
+                if (!text.matches("[a-z, A-Z]")) {
+                    super.replaceSelection(text);
+                }
+            }
+        };
+ 
+        sum.setPromptText("Enter the total");
+        sum.setPrefColumnCount(10);
+        GridPane.setConstraints(sum, 1, 0);
+        grid.getChildren().add(sum);
+        
+        Button submit = new Button("Submit");
+        GridPane.setConstraints(submit, 2, 0);
+        grid.getChildren().add(submit);
+        
+        submit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                label.setText(null);
+            }
+        });
+        
+        GridPane.setConstraints(label, 0, 1);
+        GridPane.setColumnSpan(label, 3);
+        grid.getChildren().add(label);
+        
+        scene.setRoot(grid);
+        stage.show();
+    }
+ 
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
+
 
 
 
