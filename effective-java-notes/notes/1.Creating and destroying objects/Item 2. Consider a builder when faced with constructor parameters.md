@@ -6,4 +6,4 @@ Las factorias estáticas y los constructores comparten una limitación: no escal
 
 Tradicionalmente se ha uso el conocido patrón *telescoping constructor*. Este patrón consiste en tener un constructor con los parámetros obligatorios, y para ir añadiendo los parámetros opcionales se usa la sobrecarga de constructor. 
 
-![car class]()
+![car class](https://github.com/adrG2/java-notes-spanish/blob/master/effective-java-notes/notes/code/1.Creating%20and%20destroying%20objects/Item2/car.png)
