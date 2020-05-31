@@ -25,14 +25,14 @@ El patrón de inyección de dependencias es tan simple que muchos programadores 
 Una variante del patrón es pasar una **factoría de recurso** al constructor. Una factoría es un objeto que puede ser llamado varias veces para crear instancias de un tipo(Facory Method pattern). La interface **Supplier<T>** es perfecta para representar factorías. Los métodos que reciben por parámetro una **Supplier<T>** deberían restingir el type parameter usando un *bounded wildcard type* para permitir que el cliente pase una factoría que cree cualquier subtipo de un tipo específico. 
 
 ```Java
-Room create(Supplier<? extends Fitment> fitmentFactory) {
+Room create(Supplier<? extends Fitment> fitm00000000000000000000000000000000000000000000000000000000000000000000000000entFactory) {
     //
 }
 ```
 
 A pesar de que la inyección de dependencias mejora la flexibilidad y la testabilidad, puede desordenar grandes proyectos, los cuales contienen cientos de dependencias. Este desorden puede ser casi eliminado usando un framework de DI, como Dagger, Guice o Spring. 
 
-En resumen, no uses singleton ni clases de utilidad para implementar una clase que dependa de uno o más recursos subyacentes cuyo comportamiento afecta a la de la clase directamente. En vez de eso, pasa los recursos, o factorías para crearlos, dentro del constructor(o static factory o builder). 
+En resumen, no uses singleton ni clases de utilidad para implementar una clase que dependa de uno o más recursos subyacentes cuyo comportamiento afecta al de la clase, y no hacen que la clase cree estos recursos directamente. En vez de eso, pasa los recursos, o factorías para crearlos, dentro del constructor(o static factory o builder). 
 
 Usar DI mejorará enormemente:
 * Flexibilidad
