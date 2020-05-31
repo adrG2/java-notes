@@ -8,7 +8,7 @@ Las factorias estáticas y los constructores comparten una limitación: no escal
 
 Este patrón consiste en tener un constructor con los parámetros obligatorios, y para ir añadiendo los parámetros opcionales se usa la sobrecarga de constructor. 
 
-![carTelescoping class](https://github.com/adrG2/java-notes-spanish/blob/master/effective-java-notes/code/1.Creating%20and%20destroying%20objects/Item2/car.png)
+![carTelescoping class](https://github.com/adrG2/java-notes-spanish/blob/master/effective-java-notes/code/1.Creating%20and%20destroying%20objects/Item2/carTelescopingPattern.png)
 
 Al utilizar este patrón, en muchas ocasiones, estaremos obligados a pasar un valor por parámetro que no queremos. En el ejemplo anterior tendremos que setear a **false** extras del coche que no queremos activar, cuando lo más eficiente sería sólo activarlos cuando realmente ese coche vaya a incorporarlos. Con "pocos" parámetros esto no tendría porqué parecer algo horrible pero se te irá de las manos rápidamente en cuanto aumente el número de parámetros.
 
@@ -18,11 +18,11 @@ En conclusión, el patrón *telescoping constructor* funciona, pero se hace comp
 
 Con este patrón se llama a un constructor sin parámetros para crear el objeto y luego con setter estableces los valores de los parámetros obligatios y opcionales. 
 
-![carJavaBean class]()
+![carJavaBean class](https://github.com/adrG2/java-notes-spanish/blob/master/effective-java-notes/code/1.Creating%20and%20destroying%20objects/Item2/carJavaBeanPattern.png)
 
 Este patrón no tiene ninguna de las desventajas del patrón *telescoping*. Es fácil crear instancias y leer el código resultante: 
 
-![carJavaBean cretaing]()
+![carJavaBean cretaing](https://github.com/adrG2/java-notes-spanish/blob/master/effective-java-notes/code/1.Creating%20and%20destroying%20objects/Item2/carTelescopingPatternCreating.png)
 
 Importantes desventajas:
 
@@ -35,7 +35,7 @@ Importantes desventajas:
 
 En lugar de instanciar el obecto deseado directamente, el cliente llama a un constructor (o factoría estática) con todos los parámetros requeridos y obtiene un objeto *builder*. Luego se llaman a métodos "setters" por cada parámetro opcional que queramos establecer. Para finalizar, el cliente llama a un método sin parámetros llamado *build* para generar el objeto, el cuál suele ser *inmutable*. El builder suele ser un miembro estático de clase de la clase que construye.
 
-![carBuilderPattern class]()
+![carBuilderPattern class](https://github.com/adrG2/java-notes-spanish/blob/master/effective-java-notes/code/1.Creating%20and%20destroying%20objects/Item2/CarBuilderPattern.png)
 
 La clase CarBuilderPattern es inmutable, y el valor por defecto de todos los parámetros está en un único lugar. Los métodos "setters" del builder devuelven al propio builder para que las invocaciones se puedan encadenar. 
 
@@ -49,11 +49,11 @@ La validación de los parámetros se realiza en el constructor y en los métodos
 
 **El patrón builder se adapta bien a las jerarquías de clase**. Usar una jerarquía paralela de builders, cada uno anidado en la clase correspondiente. Las clases abstractas tienen builders abstractos; las clases concretas tienen builders concretos. 
 
-![pizza abstract]()
+![pizza abstract](https://github.com/adrG2/java-notes-spanish/blob/master/effective-java-notes/code/1.Creating%20and%20destroying%20objects/Item2/pizzaAbstract.png)
 
 Fíjate en que *Pizza.Builder* es un tipo genérico con un *parámetro de tipo recursivo*. Esto, junto con el método abstracto *self*, permite el encadenamiento de métodos funcione correctamente en las subclases, sin la necesidad de usar *casts*. Esta solución para el hecho de que Java carece de un tipo *self* es conocido como el *tipo self simulado*.
 
-![pizza subclasses]()
+![pizza subclasses](https://github.com/adrG2/java-notes-spanish/blob/master/effective-java-notes/code/1.Creating%20and%20destroying%20objects/Item2/pizza_subclasses.png)
 
 Fíjate que el método *build* en el builder de cada subclase se declara para devolver la subclase correcta. Esta técnica, en la que se declara un método de subclase para devolver un subtipo del tipo de devolución declarado en la superclase, se conoce como *covariant return typing*.
 
