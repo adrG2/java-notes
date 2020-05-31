@@ -25,7 +25,7 @@ El patrón de inyección de dependencias es tan simple que muchos programadores 
 Una variante del patrón es pasar una **factoría de recurso** al constructor. Una factoría es un objeto que puede ser llamado varias veces para crear instancias de un tipo(Facory Method pattern). La interface **Supplier<T>** es perfecta para representar factorías. Los métodos que reciben por parámetro una **Supplier<T>** deberían restingir el type parameter usando un *bounded wildcard type* para permitir que el cliente pase una factoría que cree cualquier subtipo de un tipo específico. 
 
 ```Java
-Room create(Supplier<? extends Fitment> fitm00000000000000000000000000000000000000000000000000000000000000000000000000entFactory) {
+Room create(Supplier<? extends Fitment> fitmentFactory) {
     //
 }
 ```
