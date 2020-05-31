@@ -1,4 +1,4 @@
-public class Car {
+public class CarTelescopingPattern {
     private final int doors; // required
     private final Motor motor; // required
     private final int seats; // required
@@ -8,23 +8,23 @@ public class Car {
     private final boolean automaticLightSwitching; // optional
 
 
-    public Car (int doors, Motor motor, int seats) {
+    public CarTelescopingPattern (int doors, Motor motor, int seats) {
         this(doors, motor, seats, false);
     }
 
-    public Car(int doors, Motor motor, int seats, boolean leatherSeats) {
+    public CarTelescopingPattern(int doors, Motor motor, int seats, boolean leatherSeats) {
         this(doors, motor, seats, leatherSeats, false);
     }
 
-    public Car(int doors, Motor motor, int seats, boolean leatherSeats, boolean heatingSeats) {
+    public CarTelescopingPattern(int doors, Motor motor, int seats, boolean leatherSeats, boolean heatingSeats) {
         this(doors, motor, seats, leatherSeats, heatingSeats, false);
     }
 
-    public Car(int doors, Motor motor, int seats, boolean leatherSeats, boolean heatingSeats, boolean spareWheel) {
+    public CarTelescopingPattern(int doors, Motor motor, int seats, boolean leatherSeats, boolean heatingSeats, boolean spareWheel) {
         this(doors, motor, seats, leatherSeats, heatingSeats, spareWheel, false);
     }
 
-    public Car(
+    public CarTelescopingPattern(
         int doors,
         Motor motor, 
         int seats,
