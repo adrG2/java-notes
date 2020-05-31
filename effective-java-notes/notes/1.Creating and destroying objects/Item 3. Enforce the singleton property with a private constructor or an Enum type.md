@@ -1,4 +1,4 @@
-# Item 3. Enforce the singleton property with a private constructor or an anum type
+# Item 3. Enforce the singleton property with a private constructor or an Enum type
 
 Un *singleton* es una clase que se instancia una única vez. Los Singleton suelen representar un objeto sin estado, como una función o un componente del sistema que es intrínsecamente único. Hacer que una clase sea un singleton puede dificultar el testing de sus clientes, porque es imposible sustituir una implementación mockeada de un singleton a menos que implemente una interfaz que sirva como su tipo.
 
