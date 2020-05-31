@@ -22,10 +22,10 @@ public class SpellCheker {
 
 El patrón de inyección de dependencias es tan simple que muchos programadores lo han usado durante años sin tan siquiera saber si tiene un nombre. DI funciona con un arbitrario número de recursos y grafos de depedencias. Preserva la **inmutabilidad**, así *múltiples clientes pueden compartir objetos dependientes*(asumiendo que los lcientes desean el mismo recurso subyacente). **DI es igualmente aplicable a constructores, static factories y builders**.
 
-Una variante del patrón es pasar una **factoría de recurso** al constructor. Una factoría es un objeto que puede ser llamado varias veces para crear instancias de un tipo(Facory Method pattern). La interface **Supplier<T>** es perfecta para representar factorías. Los métodos que toma **Supplier<T>** en su input deberían restingir el type parameter usando un *bounded wildcard type* para permitir que el cliente pase en una factoría que cree cualquier subtipo de un tipo específico. 
+Una variante del patrón es pasar una **factoría de recurso** al constructor. Una factoría es un objeto que puede ser llamado varias veces para crear instancias de un tipo(Facory Method pattern). La interface **Supplier<T>** es perfecta para representar factorías. Los métodos que reciben por parámetro una **Supplier<T>** deberían restingir el type parameter usando un *bounded wildcard type* para permitir que el cliente pase una factoría que cree cualquier subtipo de un tipo específico. 
 
 ```Java
-Mosaic create(Supplier<? extends Tile> tileFactory) {
+Room create(Supplier<? extends Fitment> fitmentFactory) {
     //
 }
 ```
