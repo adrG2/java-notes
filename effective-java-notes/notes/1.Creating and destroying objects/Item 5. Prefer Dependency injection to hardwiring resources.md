@@ -4,9 +4,7 @@ Muchas clases dependen de uno o más recursos subyacentes. Por ejemplo un spell 
 
 Ninguna de esos enfoques son satifsfactorios ya que asumen que hay unicamente un diccionario. En la práctica, cada lenguaje tiene su propio diccionario, y diccionarios especiales usados por vocabularios especiales. También, podríamos querer usar un diccinario especial para testear. Parece algo lógico que un único diccionario no será suficiente.
 
-Podrías tratar de hacer que SpellChecker tenga soporte para múltiples diccionarios con un campo llamado 'dictionary' que no sea final y añadiendo un método para cambiar el diccionario de un spell checker existente, pero esto sería algo torpe, propenso a errores, e inviable en un entorno concurrente.
-
-**Las clases estáticas de utilidad y los singleton son inapropieados para las clases cuyo comportamiento está parametrizado por un recurso subyacente**
+Podrías tratar de hacer que SpellChecker tenga soporte para múltiples diccionarios con un campo llamado 'dictionary' que no sea final y añadiendo un método para cambiar el diccionario de un spell checker existente, pero esto sería algo torpe, propenso a errores, e inviable en un entorno concurrente. **Las clases estáticas de utilidad y los singleton son inapropieados para las clases cuyo comportamiento está parametrizado por un recurso subyacente**
 
 ¿Cómo soportar múltiples instancias de la clase y que cada una de las cuales utilice el recurso deseado por el cliente? **Pasando el recurso dentro del constructor cuando creas una nueva instancia**. Esto es una forma de *dependency injection*. 
 
